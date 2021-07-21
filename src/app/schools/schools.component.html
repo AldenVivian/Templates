@@ -1,0 +1,61 @@
+<div class="container">
+
+    <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-12">
+        <h3 class="text-center">Add Schools</h3>
+            <form [formGroup]="schoolForm" novalidate>
+                <div class="col-xs-12">
+                    <div class="form-group clearfix">
+                        <label>Name</label>
+                        <input type="text" class="form-control" formControlName="uschname" name="uschname" placeholder="Name"/>
+                        <div class="error" *ngIf="schoolForm.controls['uschname'].errors">
+                            <div *ngIf="schoolForm.controls['uschname'].errors.minlength">Name must be at least 6 characters</div>
+                            <div *ngIf="schoolForm.controls['uschname'].errors.maxlength">Name must be at most 20 characters</div>
+                        </div>
+  
+                        
+  
+                    </div>
+                </div>
+                
+                <div class="col-xs-12">
+                    <!--add input fields-->
+                </div>
+                <div class="col-xs-12">
+                    <div class="form-group">
+                        <button *ngIf="save" [disabled]="schoolForm.invalid" class="btn btn-primary btn-block" (click)="saveUser(userid)">Save</button>
+                        <button *ngIf="!save" type="submit" [disabled]="schoolForm.invalid" class="btn btn-primary btn-block" (click)="addUser()">Submit</button>
+                    </div>
+                </div>  
+                         
+            </form>
+                 
+    </div>      
+  
+    <table class="table table-bordered" *ngIf="users.length != 0"><!-- *ngIf="!users.length == 0"-->
+        <thead>
+            <tr>
+                <th>No.</th>
+                <th>User ID</th>
+                <th>Schools</th>
+                <th>Actions</th>
+                
+            </tr>            
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users; let i=index;" >
+                <td>{{i+1}}</td>
+                <td>{{user.uid}}</td>
+                <td>{{user.uschname}}</td>
+                
+                
+                <td>
+                    <button type="button" class="btn btn-success btn-sm" (click)="editUser(user.uid)">Edit</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="deleteUser(user.uid)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  
+  
+  </div>
+  
